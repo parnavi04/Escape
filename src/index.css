@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Define our theme variables */
+  --hacker-green: #00ff41;
+  --hacker-green-dim: rgba(0, 255, 65, 0.6);
+  --dark-bg: #050806;
+  --glow-color: rgba(0, 255, 65, 0.5);
+  --red-glow-color: rgba(244, 63, 94, 0.6);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--hacker-green);
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem; /* Slightly larger base font for VT323 readability */
+  text-shadow:
+    0 0 2px rgba(0,0,0,0.5),
+    0 0 5px var(--glow-color);
+
+  /* CRT Flicker Animation */
+  animation: flicker 12s infinite steps(1, end);
+}
+
+/* Scanlines Overlay */
+body::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 100;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  25% { opacity: 0.95; }
+  25.1% { opacity: 1; }
+  50% { opacity: 0.98; }
+  50.1% { opacity: 1; }
+  75% { opacity: 0.96; }
+  75.1% { opacity: 1; }
+}
+
+/* Remove default styles that are no longer needed */
+h1, a, button {
+  all: unset;
+  cursor: revert;
+}
